@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp17", "WpfApp17.csproj", "{30B10A5E-D896-43A0-B5D8-A5F92D4DD18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgebraSystem.Tests", "..\AlgebraSystem.Tests\AlgebraSystem.Tests.csproj", "{6EE7854A-B53D-49A1-A912-18AAA1D88D15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30B10A5E-D896-43A0-B5D8-A5F92D4DD18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B10A5E-D896-43A0-B5D8-A5F92D4DD18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B10A5E-D896-43A0-B5D8-A5F92D4DD18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B10A5E-D896-43A0-B5D8-A5F92D4DD18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE7854A-B53D-49A1-A912-18AAA1D88D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE7854A-B53D-49A1-A912-18AAA1D88D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE7854A-B53D-49A1-A912-18AAA1D88D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE7854A-B53D-49A1-A912-18AAA1D88D15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {196E9181-9FDE-49B1-B3B1-45138BA59C98}
+	EndGlobalSection
+EndGlobal

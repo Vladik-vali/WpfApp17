@@ -1,0 +1,280 @@
+﻿<Window x:Class="AlgebraSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AlgebraSystem"
+        Title="📐 Система Алгебра" Height="731" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F2F5">
+
+    <Window.Resources>
+        <local:NumberFormatConverter x:Key="NumberFormatConverter"/>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#CCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#667EEA"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E8ECF1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" CornerRadius="10" Margin="0,0,0,15">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#667EEA" Offset="0"/>
+                    <GradientStop Color="#764BA2" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel>
+                <TextBlock Text="📐 Система Алгебра" FontSize="28" FontWeight="Bold" Foreground="White" 
+                           HorizontalAlignment="Center" Padding="15,10,15,5"/>
+                <TextBlock Text="Изучение алгебры с комфортом" FontSize="12" Foreground="#E0D4FF" 
+                           HorizontalAlignment="Center" Padding="0,0,0,10"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl Grid.Row="1" Margin="0,0,0,10" Background="Transparent" BorderThickness="0">
+
+            <TabItem Header="📚 Темы" FontSize="13" FontWeight="SemiBold" Padding="20,10">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Background="White" CornerRadius="10" Margin="0,0,10,0" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <StackPanel>
+                            <Border Background="#667EEA" CornerRadius="10,10,0,0" Padding="12">
+                                <TextBlock Text="Список тем" Foreground="White" FontWeight="Bold" FontSize="14"/>
+                            </Border>
+                            <ListBox x:Name="TopicsList" Height="300" Margin="10" BorderThickness="0" 
+                                     SelectionChanged="TopicsList_SelectionChanged"/>
+                            <Border Background="#F8F9FC" Padding="10" Margin="10" CornerRadius="8" 
+                                    BorderBrush="#E0E0E0" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="➕ Добавить тему" FontWeight="Bold" Margin="0,0,0,8" 
+                                               Foreground="#667EEA" FontSize="13"/>
+                                    <TextBox x:Name="NewTopicName" Margin="0,0,0,8" Tag="Название"/>
+                                    <TextBox x:Name="NewTopicDesc" Margin="0,0,0,8" Tag="Описание" Height="60" TextWrapping="Wrap"/>
+                                    <TextBox x:Name="NewTopicContent" Margin="0,0,0,10" Tag="Содержание" Height="80" TextWrapping="Wrap"/>
+                                    <Button x:Name="AddTopicBtn" Content="✨ Добавить" Background="#27AE60" Foreground="White" 
+                                            Click="AddTopicBtn_Click" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="15" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <ScrollViewer>
+                            <TextBlock x:Name="TopicContent" TextWrapping="Wrap" FontSize="14" Foreground="#2C3E50"/>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="🧮 Решение уравнений" FontSize="13" FontWeight="SemiBold" Padding="20,10">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,10" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="📐 Решение квадратного уравнения" FontWeight="Bold" FontSize="16" 
+                                       Margin="0,0,0,15" Foreground="#667EEA"/>
+                            <Border Background="#F8F9FC" Padding="15" CornerRadius="8" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="ax² + bx + c = 0" FontSize="18" FontWeight="Bold" 
+                                               HorizontalAlignment="Center" Margin="0,0,0,15" Foreground="#764BA2"/>
+                                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,15">
+                                        <TextBox x:Name="CoefA" Width="70" Margin="0,0,5,0" Text="1" TextAlignment="Center" FontSize="14"/>
+                                        <TextBlock Text="x² +" Margin="5,0" FontSize="16" VerticalAlignment="Center" Foreground="#555"/>
+                                        <TextBox x:Name="CoefB" Width="70" Margin="5,0" Text="0" TextAlignment="Center" FontSize="14"/>
+                                        <TextBlock Text="x +" Margin="5,0" FontSize="16" VerticalAlignment="Center" Foreground="#555"/>
+                                        <TextBox x:Name="CoefC" Width="70" Margin="5,0" Text="0" TextAlignment="Center" FontSize="14"/>
+                                        <TextBlock Text="= 0" Margin="5,0" FontSize="16" VerticalAlignment="Center" Foreground="#555"/>
+                                    </WrapPanel>
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <RadioButton x:Name="UseDiscriminant" GroupName="Method" Content="📊 Дискриминант" 
+                                                     IsChecked="True" Margin="0,0,20,0" Foreground="#2C3E50" FontSize="13"/>
+                                        <RadioButton x:Name="UseVieta" GroupName="Method" Content="📐 Теорема Виета" 
+                                                     Margin="0,0,20,0" Foreground="#2C3E50" FontSize="13"/>
+                                        <Button x:Name="SolveEquationBtn" Content="Решить" Background="#3498DB" Foreground="White" 
+                                                Click="SolveEquationBtn_Click" FontWeight="SemiBold"/>
+                                        <Button x:Name="ClearEquationBtn" Content="Очистить" Background="#95A5A6" Foreground="White" 
+                                                Margin="10,0,0,0" Click="ClearEquationBtn_Click" FontWeight="SemiBold"/>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="15" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <ScrollViewer>
+                            <TextBlock x:Name="EquationResult" FontSize="14" FontFamily="Consolas" Foreground="#2C3E50"/>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="📊 Таблицы" FontSize="13" FontWeight="SemiBold" Padding="20,10">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="15" Margin="0,0,0,10" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock Text="🔍 Поиск:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold" FontSize="13"/>
+                            <TextBox x:Name="SearchBox" Width="160" TextChanged="SearchBox_TextChanged"/>
+                            <Button x:Name="RefreshTablesBtn" Content="Обновить" Background="#3498DB" Foreground="White" 
+                                    Margin="15,0,0,0" Click="RefreshTablesBtn_Click" FontWeight="SemiBold"/>
+                        </WrapPanel>
+                    </Border>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" CornerRadius="10" BorderBrush="#667EEA" BorderThickness="2" Padding="5" Margin="0,0,5,0" Background="White">
+                            <StackPanel>
+                                <Border Background="#667EEA" CornerRadius="8" Padding="8" Margin="0,0,0,5">
+                                    <TextBlock Text="📊 Квадраты" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                                </Border>
+                                <DataGrid x:Name="SquaresGrid" AutoGenerateColumns="False" IsReadOnly="True" 
+                                          HeadersVisibility="Column" BorderThickness="0" RowHeight="30" FontSize="12"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="Background" Value="#667EEA"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Padding" Value="10"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="FontSize" Value="13"/>
+                                        </Style>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Число" Binding="{Binding number}" Width="*"/>
+                                        <DataGridTextColumn Header="Квадрат" Binding="{Binding square, Converter={StaticResource NumberFormatConverter}}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1" CornerRadius="10" BorderBrush="#E67E22" BorderThickness="2" Padding="5" Margin="5,0,5,0" Background="White">
+                            <StackPanel>
+                                <Border Background="#E67E22" CornerRadius="8" Padding="8" Margin="0,0,0,5">
+                                    <TextBlock Text="📊 Кубы" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                                </Border>
+                                <DataGrid x:Name="CubesGrid" AutoGenerateColumns="False" IsReadOnly="True" 
+                                          HeadersVisibility="Column" BorderThickness="0" RowHeight="30" FontSize="12"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="Background" Value="#E67E22"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Padding" Value="10"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="FontSize" Value="13"/>
+                                        </Style>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Число" Binding="{Binding number}" Width="*"/>
+                                        <DataGridTextColumn Header="Куб" Binding="{Binding cube, Converter={StaticResource NumberFormatConverter}}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" CornerRadius="10" BorderBrush="#27AE60" BorderThickness="2" Padding="5" Margin="5,0,0,0" Background="White">
+                            <StackPanel>
+                                <Border Background="#27AE60" CornerRadius="8" Padding="8" Margin="0,0,0,5">
+                                    <TextBlock Text="🔢 Факториалы" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                                </Border>
+                                <DataGrid x:Name="FactorialsGrid" AutoGenerateColumns="False" IsReadOnly="True" 
+                                          HeadersVisibility="Column" BorderThickness="0" RowHeight="30" FontSize="12"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="Background" Value="#27AE60"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Padding" Value="10"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="FontSize" Value="13"/>
+                                        </Style>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Число" Binding="{Binding number}" Width="*"/>
+                                        <DataGridTextColumn Header="Факториал" Binding="{Binding factorial, Converter={StaticResource NumberFormatConverter}}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar Grid.Row="2" Background="Transparent" Padding="10">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="✅ Готов к работе" Foreground="#667EEA" FontSize="12"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
